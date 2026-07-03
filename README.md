@@ -120,7 +120,7 @@ yolo task=obb mode=train model=yolov8n-obb.pt data=data.yaml epochs=200 imgsz=64
 After training completes, copy the generated `best.pt` checkpoint from:
 
 ```text
-runs/obb/train*/weights/best.pt
+runs/obb/train/weights/best.pt
 ```
 
 into the project root directory.
