@@ -99,9 +99,7 @@ for family, h_std, w_std in BOOK_SIZE_PRIORS:
 df["prior_width_ratio"] = df["standard_width_prior"] / df["height_mm_est"]
 
 
-# =========================
 # 2B. Train width models and create width_pred_mm
-# =========================
 
 width_target = "W_mm"
 
@@ -256,9 +254,7 @@ def evaluate_subset_width(data_subset, feature_cols, target="W_mm"):
 
     return mae
 
-# =========================
 # OOF width prediction
-# =========================
 from sklearn.base import clone
 
 df["width_pred_mm"] = np.nan
@@ -327,10 +323,7 @@ df_non_ambiguous = df[
     ~df["height_mm_est"].between(AMB_LOW, AMB_HIGH)
 ].copy()
 
-# =========================
 # Weight error breakdown by ambiguous width zone
-# =========================
-
 AMB_LOW = 228
 AMB_HIGH = 242
 
@@ -340,10 +333,7 @@ print("\n================ WEIGHT ZONE BREAKDOWN ================")
 print("Ambiguous zone samples:", df["ambiguous_height_zone"].sum())
 print("Non-ambiguous samples:", (~df["ambiguous_height_zone"]).sum())
 
-# ==========================================
 # Ambiguous-height ablation split
-# ==========================================
-
 print("\n===== DATASET SPLIT CHECK =====")
 print("Total samples:", len(df))
 print("Ambiguous zone:", len(df_ambiguous))
@@ -369,9 +359,7 @@ evaluate_subset_width(
     width_features
 )
 
-# =========================
 # Width error analysis
-# =========================
 df["width_abs_error"] = abs(df["W_mm"] - df["width_pred_mm"])
 
 df["width_class"] = pd.cut(
@@ -511,10 +499,7 @@ df["thickness_to_height_est"] = df["thickness_mm_est"] / df["height_mm_est"]
 df["thickness_x_depth"] = df["thickness_mm_est"] * df["depth_rs_mm"]
 df["height_x_depth"] = df["height_mm_est"] * df["depth_rs_mm"]
 
-# =========================
 # 3. Define Model A, B, C feature sets
-# =========================
-
 # Model A: clean upper-bound model
 # Uses true measured book geometry
 features_A = [
@@ -524,7 +509,7 @@ features_A = [
     "true_volume_proxy"
 ]
 
-# Model B: deployment model
+# Model B: deployment estimated dimension
 # Uses camera-estimated height/thickness + predicted width
 features_B = [
     "height_mm_est",
@@ -567,9 +552,7 @@ categorical_candidates = [
     "book_type_code"
 ]
 
-# =========================
 # 4. Helper function
-# =========================
 def prepare_features(df, feature_list):
     available_features = [col for col in feature_list if col in df.columns]
     available_cats = [col for col in categorical_candidates if col in df.columns]
@@ -658,9 +641,7 @@ def evaluate_model(model_name, feature_set_name, X, y, numeric_features, categor
 
     return results
     
-# =========================
 # 5. Run Model A, B, C, D
-# =========================
 all_results = []
 
 feature_sets = {
@@ -691,10 +672,7 @@ for set_name, features in feature_sets.items():
     if results:
         all_results.extend(results)
 
-
-# =========================
 # 6. Results table
-# =========================
 results_df = pd.DataFrame(all_results)
 
 if not results_df.empty:
