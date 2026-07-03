@@ -26,7 +26,7 @@ total_time = end_time - start_time
 print(f"\nFinished {TOTAL_CLICKS} clicks!")
 print(f"Total time taken: {total_time:.2f} seconds ({total_time/60:.2f} minutes)")
 
-# Play beep sound
+# Used to alert me when done
 frequency = 1000  # Hertz
 duration = 500    # milliseconds
 winsound.Beep(frequency, duration)
