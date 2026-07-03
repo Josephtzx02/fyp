@@ -10,11 +10,12 @@ import threading
 import joblib
 
 # CONFIG
-MODEL_PATH = "best.pt"
+MODEL_PATH = "runs/obb/train3/weights/best.pt"
 USE_REALSENSE = True
 SOURCE = 2 # "book_obb_dataset_v3/images/train/20260117_162733_287050_jpg.rf.cc44722e0d74f044ec88e97d87b29588.jpg"
 START_CONF = 0.8
-CSV_OUTPUT = "labels.csv"
+CSV_OUTPUT = "width_weight_dataset.csv"
+FIXED_DISTANCE_MM = 400.0
 DISPLAY_SCALE = 0.75
 INFO_PANEL_WIDTH = 420
 CENTER_ZONE_RATIO = 0.15
@@ -27,12 +28,13 @@ MAX_VALID_DEPTH_MM = 405
 conf_threshold = START_CONF
 detections = []
 selected_det = None
+USE_DEPTH_AWARE_MM = True
 intrinsics = None
 display_resize_scale = 1.0
 WAITING_FOR_INPUT = False
 INPUT_VALUES = None
 
-os.makedirs("book_width_dataset/images", exist_ok=True) # FOLDERS
+os.makedirs("images", exist_ok=True) # FOLDERS
 
 # UTILS: Four point transform for rotated crop
 def order_points(pts):
