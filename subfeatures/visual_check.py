@@ -5,9 +5,7 @@ import random
 import math
 import numpy as np
 
-# ======================
 # CONFIG
-# ======================
 DATA_YAML = "data.yaml"       # your data.yaml
 SET = "test"                 # choose "train", "val", or "test"
 SHOW_WINDOW = True            # True = display image, False = save images
@@ -15,7 +13,6 @@ PAUSE_BETWEEN = True          # True = wait for Enter to show next image
 SAVE_PATH = "visual_check_output"  # only used if SHOW_WINDOW=False
 SAMPLE_SIZE = 10              # number of images to check (None = all)
 LABEL_FOLDER_NAME = "labels"  
-# ======================
 
 # Load data.yaml
 with open(DATA_YAML, "r") as f:
