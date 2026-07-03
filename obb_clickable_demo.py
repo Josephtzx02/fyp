@@ -8,11 +8,11 @@ import os
 import pyrealsense2 as rs
 import joblib
 
-MODEL_PATH = "runs/obb/train3/weights/best.pt"
+MODEL_PATH = "best.pt"
 USE_REALSENSE = True
 SOURCE = 2
 START_CONF = 0.8
-CSV_OUTPUT = "selected_books2.csv"
+CSV_OUTPUT = "selected_books.csv"
 DISPLAY_SCALE = 0.75
 INFO_PANEL_WIDTH = 420
 CENTER_ZONE_RATIO = 0.15
@@ -229,7 +229,6 @@ def get_median_depth_mm(depth_frame, cx, cy, patch=7):
     return float(np.median(depths))
 
 # MAIN LOOP
-# ===============================
 while True:
 
     # ---------- FRAME ----------
