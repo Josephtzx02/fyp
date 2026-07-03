@@ -3,19 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-# =========================
 # 1. Load your CSV
-# =========================
-csv_path = "weight_dataset.csv" #width_dataset.csv
+csv_path = "weight_dataset.csv"
 df = pd.read_csv(csv_path)
 
 # Change these column names if your CSV uses different names
 width_col = "W_mm"
 weight_col = "mass"
 
-# =========================
 # 2. Function to plot bell curve
-# =========================
 def plot_distribution(data, title, xlabel):
     data = data.dropna()
 
