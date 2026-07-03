@@ -2,27 +2,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# --------------------------------------------------
 # Load thesis dataset
-# --------------------------------------------------
 csv_path = 'weight_dataset_with_width_pred_mm.csv'
 df = pd.read_csv(csv_path)
 
 # Calculate residuals
 df['residual'] = df['width_pred_mm'] - df['W_mm']
 
-# --------------------------------------------------
 # Academic plotting style
-# --------------------------------------------------
 plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.size'] = 11
 plt.rcParams['axes.linewidth'] = 1.2
 
 fig, ax = plt.subplots(figsize=(11, 6.5))
 
-# --------------------------------------------------
 # Split Royal_UK from remaining paper families
-# --------------------------------------------------
 other_mask = df['auto_paper_family'] != 'Royal_UK'
 royal_mask = df['auto_paper_family'] == 'Royal_UK'
 
@@ -32,9 +26,7 @@ true_royal = royal_df[royal_df['W_mm'] <= 169]
 wide_textbook = royal_df[(royal_df['W_mm'] > 169) & (royal_df['W_mm'] < 200)]
 square_outlier = royal_df[royal_df['W_mm'] >= 200]
 
-# --------------------------------------------------
 # Scatter plots
-# --------------------------------------------------
 ax.scatter(
     df.loc[other_mask, 'W_mm'],
     df.loc[other_mask, 'residual'],
@@ -78,9 +70,7 @@ ax.scatter(
     label='Square Binder Outlier'
 )
 
-# --------------------------------------------------
 # Zero residual reference
-# --------------------------------------------------
 ax.axhline(
     0,
     color='#2c3e50',
@@ -89,9 +79,7 @@ ax.axhline(
     alpha=0.85
 )
 
-# --------------------------------------------------
 # Linear trend line
-# --------------------------------------------------
 coef = np.polyfit(df['W_mm'], df['residual'], 1)
 trend = np.poly1d(coef)
 
@@ -106,9 +94,7 @@ ax.plot(
     label='Linear Trend'
 )
 
-# --------------------------------------------------
 # Annotate extreme outlier
-# --------------------------------------------------
 if not square_outlier.empty:
     outlier = square_outlier.loc[square_outlier['residual'].idxmin()]
 
@@ -125,9 +111,7 @@ if not square_outlier.empty:
         ha='left'
     )
 
-# --------------------------------------------------
 # Labels
-# --------------------------------------------------
 ax.set_xlabel(
     'True Measured Book Width ($W_{mm}$) [mm]',
     fontsize=12,
@@ -149,9 +133,7 @@ ax.set_ylabel(
 #     pad=15
 # )
 
-# --------------------------------------------------
 # Grid and axes
-# --------------------------------------------------
 ax.grid(
     True,
     linestyle=':',
@@ -164,9 +146,7 @@ ax.set_ylim(-80, 40)
 
 ax.minorticks_on()
 
-# --------------------------------------------------
 # Legend
-# --------------------------------------------------
 ax.legend(
     loc='upper right',
     frameon=True,
