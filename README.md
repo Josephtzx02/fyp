@@ -274,7 +274,7 @@ The primary data acquisition program.
 
 This is the **first step** of the entire project.
 
-The script captures synchronized RGB-D data from the Intel RealSense D435 and automatically saves the dataset into:
+The script captures synchronised RGB-D data from the Intel RealSense D435 and automatically saves the dataset into:
 
 ```
 RGB/
@@ -294,7 +294,7 @@ Used after the object detector has been trained.
 
 The script loads the trained `best.pt` model and allows the user to select individual detected books from the camera view.
 
-Ground-truth information including width and weight can then be entered manually to build the regression dataset used for machine learning.
+Ground-truth information, including width and weight, can then be entered manually to build the regression dataset used for machine learning.
 
 This script was used to create the final **205-book regression dataset**.
 
@@ -310,7 +310,7 @@ Maintained only for reference.
 
 ## capture_cnn_data_depthonly.py
 
-Specialized data collection tool for experiments involving fixed calibrated depth measurements.
+Specialised data collection tool for experiments involving fixed calibrated depth measurements.
 
 ---
 
@@ -318,7 +318,7 @@ Specialized data collection tool for experiments involving fixed calibrated dept
 
 Dataset collection tool designed for targeted sampling of specific book categories.
 
-Rather than collecting books randomly, the script prioritizes underrepresented structural groups such as:
+Rather than collecting books randomly, the script prioritises underrepresented structural groups such as:
 
 * small pocket books
 * large and tall books
@@ -333,7 +333,7 @@ This helps improve dataset diversity and balance during regression model develop
 
 Contains supporting utilities used throughout the project.
 
-These scripts assist with visualization, validation, debugging, and data analysis.
+These scripts assist with visualisation, validation, debugging, and data analysis.
 
 Examples include:
 
@@ -348,7 +348,7 @@ Examples include:
 These scripts were mainly used to:
 
 * generate thesis figures
-* visualize regression performance
+* visualise regression performance
 * inspect captured data
 * verify camera measurements
 * perform hardware testing
@@ -366,7 +366,7 @@ This stage converts Roboflow annotations into clean YOLOv8-OBB labels.
 
 ## convert_to_obb.py
 
-Converts Roboflow polygon annotations into standardized Oriented Bounding Boxes.
+Converts Roboflow polygon annotations into standardised Oriented Bounding Boxes.
 
 Processing includes:
 
@@ -386,7 +386,7 @@ Converts the processed COCO JSON annotation file into YOLOv8-OBB label files.
 The script:
 
 * reads every annotated polygon
-* normalizes coordinates using image width and height
+* normalises coordinates using image width and height
 * converts pixel coordinates into YOLO format
 * generates one `.txt` label file for every image
 
@@ -402,7 +402,7 @@ which is required by the Ultralytics YOLOv8-OBB training framework.
 
 ## visual_check_obb.py
 
-Visualization tool used to verify annotation quality.
+Visualisation tool used to verify annotation quality.
 
 It overlays:
 
@@ -423,7 +423,7 @@ Simple utility used to rename annotation files downloaded from Roboflow so that 
 
 Major libraries used:
 
-* Python 3.x
+* Python 3.10.11
 * Ultralytics YOLOv8
 * OpenCV
 * Intel RealSense SDK (pyrealsense2)
