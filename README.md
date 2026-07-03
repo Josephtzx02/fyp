@@ -70,12 +70,104 @@ Real-Time Deployment
 
 # Quick Start
 
-The project can be reproduced using the following workflow:
+The complete workflow to reproduce this project is summarized below.
 
-1. Read `training_setup/README.md` to set up the Python environment and train the custom YOLOv8n-OBB model.
-2. Use the scripts in `data_capture/` to capture RGB-D images and construct the regression dataset.
-3. Run `train_model_width_weight.py` to train the regression models and generate the required `.pkl` files.
-4. Launch `obb_clickable_demo.py` to perform real-time RGB-D book detection, 3D localization, and width and weight prediction.
+### Stage 1 — Capture RGB-D Dataset
+
+Run:
+
+```text
+data_capture/fyp_capture_tool.py
+```
+
+This captures synchronized RGB-D images from the Intel RealSense D435. The captured RGB images are later uploaded to Roboflow for annotation.
+
+---
+
+### Stage 2 — Annotate Images
+
+Upload the captured RGB images to Roboflow and annotate the book spines using polygon segmentation.
+
+Export the annotated dataset in **COCO Segmentation** format.
+
+---
+
+### Stage 3 — Generate and Verify OBB Annotations
+
+Inside `datafilter/`:
+
+1. Run `rename.py` if the exported filenames need to be renamed to match the project dataset structure.
+2. Run `convert_to_obb.py` to convert the Roboflow polygon annotations into refined Oriented Bounding Boxes (OBBs). This script performs:
+   - Ramer-Douglas-Peucker (RDP) polygon simplification
+   - Convex Hull generation
+   - OpenCV minimum-area rectangle fitting
+   - Clockwise corner ordering
+3. (Optional but recommended) Upload the generated OBB annotation file to a new Roboflow project for visual verification. This allows incorrect or poorly fitted bounding boxes to be inspected and corrected before model training.
+4. Export the verified dataset in **COCO Segmentation** format.
+5. Run `convert_json_to_labels.py` to convert the exported COCO annotation file into YOLOv8-OBB label files.
+---
+
+### Stage 4 — Train YOLOv8-OBB
+
+Follow the instructions in `training_setup/README.md`.
+
+The primary training command is:
+
+```bash
+yolo task=obb mode=train model=yolov8n-obb.pt data=data.yaml epochs=200 imgsz=640 batch=8
+```
+
+After training completes, copy the generated `best.pt` checkpoint from:
+
+```text
+runs/obb/train*/weights/best.pt
+```
+
+into the project root directory.
+
+---
+
+### Stage 5 — Collect Regression Dataset
+
+Run:
+
+```text
+data_capture/capture_cnn_data.py
+```
+
+Using the trained detector, manually record the ground-truth width and weight of the selected books to construct the regression dataset.
+
+---
+
+### Stage 6 — Train Regression Models
+
+Run:
+
+```text
+train_model_width_weight.py
+```
+
+This generates the trained regression models stored in `pkl_files_generated/`.
+
+---
+
+### Stage 7 — Run the Complete System
+
+Run:
+
+```text
+obb_clickable_demo.py
+```
+
+The program loads:
+
+- `best.pt`
+- `width_model.pkl`
+- `width_features.pkl`
+- `weight_model_D_huber.pkl`
+- `weight_features_D.pkl`
+
+to perform real-time book detection, 3D localization, width prediction, and weight prediction.
 
 ---
 
@@ -265,31 +357,31 @@ These scripts convert Roboflow polygon annotations into clean YOLOv8-OBB labels.
 
 ### convert_to_obb.py
 
-Converts Roboflow polygon annotations into standardized Oriented Bounding Boxes (OBB).
+Converts Roboflow polygon annotations into refined Oriented Bounding Boxes (OBBs).
 
-Processing steps include:
+The script performs the following preprocessing pipeline:
 
 - Ramer-Douglas-Peucker (RDP) polygon simplification
 - Convex Hull generation
 - OpenCV minimum-area rectangle fitting
 - Clockwise corner ordering
 
-The resulting annotations are suitable for YOLOv8-OBB training.
+The processed annotations are exported as an OBB-formatted COCO annotation file. The generated file may optionally be uploaded to Roboflow for manual verification before generating the final YOLOv8-OBB labels.
 
 ### convert_json_to_labels.py
 
-Converts the processed COCO-format annotation file into YOLOv8-OBB label files.
+Converts the verified COCO annotation file into YOLOv8-OBB label files required by the Ultralytics training framework.
 
 The script:
 
-- Reads every annotated polygon
-- Normalizes coordinates using image dimensions
-- Converts pixel coordinates into YOLO format
+- Reads each verified OBB annotation
+- Normalizes the corner coordinates using the corresponding image dimensions
+- Converts the coordinates into YOLOv8-OBB format
 - Generates one `.txt` label file for each image
 
 Each label follows the format:
 
-```
+```text
 class_id x1 y1 x2 y2 x3 y3 x4 y4
 ```
 
@@ -297,12 +389,12 @@ which is required by the Ultralytics YOLOv8-OBB training framework.
 
 ### visual_check_obb.py
 
-Visualization tool used to compare original and processed annotations.
+Visualization tool used to compare original and simplified annotations.
 
 - **Red:** Original Roboflow polygons
-- **Green:** Refined OBB annotations
+- **Green:** RDP-simplified polygons
 
-This provides a quick visual verification that preprocessing has correctly refined the annotations before training.
+This provides a quick visual verification that polygon simplification has been correctly applied before generating the final Oriented Bounding Boxes.
 
 ### rename.py
 
