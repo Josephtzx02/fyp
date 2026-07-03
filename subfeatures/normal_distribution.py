@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 # 1. Load your CSV
-csv_path = "weight_dataset.csv"
+csv_path = "data_capture/weight_dataset.csv"
 df = pd.read_csv(csv_path)
 
 # Change these column names if your CSV uses different names
