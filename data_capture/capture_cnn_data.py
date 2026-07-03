@@ -30,7 +30,7 @@ display_resize_scale = 1.0
 WAITING_FOR_INPUT = False
 INPUT_VALUES = None
 
-os.makedirs("book_width_dataset/images", exist_ok=True) # FOLDERS
+os.makedirs("images", exist_ok=True) # FOLDERS
 
 # UTILS: Four point transform for rotated crop
 def order_points(pts):
