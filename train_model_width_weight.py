@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor, Gradien
 from sklearn.linear_model import Ridge, HuberRegressor
 from sklearn.metrics import mean_absolute_error, median_absolute_error, mean_squared_error, r2_score
 
-csv_path = "weight_dataset.csv"
+csv_path = "data_capture/weight_dataset.csv"
 df = pd.read_csv(csv_path)
 
 target_col = "mass" 
