@@ -688,8 +688,8 @@ if not results_df.empty:
 
     best_width_model.fit(X_w, y_w)
 
-    joblib.dump(best_width_model, "width_model.pkl")
-    joblib.dump(width_features, "width_features.pkl")
+    joblib.dump(best_width_model, "pkl_files_generated/width_model.pkl")
+    joblib.dump(width_features, "pkl_files_generated/width_features.pkl")
 
     print("Saved width model.")
 
@@ -710,8 +710,8 @@ if not results_df.empty:
 
     final_weight_model_D.fit(X_D, y_D)
 
-    joblib.dump(final_weight_model_D, "weight_model_D_huber.pkl")
-    joblib.dump(used_D, "weight_features_D.pkl")
+    joblib.dump(final_weight_model_D, "pkl_files_generated/weight_model_D_huber.pkl")
+    joblib.dump(used_D, "pkl_files_generated/weight_features_D.pkl")
 
     print("Saved weight model.")
 
