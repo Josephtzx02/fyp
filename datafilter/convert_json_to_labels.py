@@ -2,7 +2,7 @@ import json
 import os
 
 JSON_FILE = "annotations.coco.json"
-LABEL_ROOT = r"C:\Users\Joseph\Downloads\yolov8_obb_project\book_obb_dataset_v3\labels\test"
+LABEL_ROOT = r"C:\Users\Joseph\Downloads\yolov8_obb_project\book_obb_dataset\labels\test"
 
 os.makedirs(LABEL_ROOT, exist_ok=True)
 
