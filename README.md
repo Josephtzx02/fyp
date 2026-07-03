@@ -61,7 +61,6 @@ Real-Time Deployment
 ├── obb_clickable_demo.py
 ├── train_model_width_weight.py
 ├── realtime_fps_test.py
-├── weight_dataset.csv
 ├── best.pt
 └── README.md
 ```
@@ -236,21 +235,6 @@ Purpose:
 
 ---
 
-## weight_dataset.csv
-
-Contains the complete regression dataset consisting of **205 books**.
-
-Each record includes ground-truth measurements such as:
-
-* Height
-* Thickness
-* Width
-* Weight
-
-along with engineered features used for machine learning model training.
-
----
-
 ## best.pt
 
 Final trained YOLOv8n-OBB model obtained after training.
@@ -347,6 +331,19 @@ Examples include:
 
 This strategy helps produce a more balanced regression dataset.
 
+## weight_dataset.csv
+
+Contains the complete regression dataset consisting of **205 books**.
+
+Each record includes ground-truth measurements such as:
+
+* Height
+* Thickness
+* Width
+* Weight
+
+along with engineered features used for machine learning model training.
+
 ---
 
 ## 3. datafilter/
@@ -422,11 +419,11 @@ width_model.pkl
 These models are loaded during real-time deployment:
 
 ```python
-width_model = joblib.load("width_model.pkl")
-width_features = joblib.load("width_features.pkl")
+width_model = joblib.load("pkl_files_generated/width_model.pkl")
+width_features = joblib.load("pkl_files_generated/width_features.pkl")
 
-weight_model = joblib.load("weight_model_D_huber.pkl")
-weight_features = joblib.load("weight_features_D.pkl")
+weight_model = joblib.load("pkl_files_generated/weight_model_D_huber.pkl")
+weight_features = joblib.load("pkl_files_generated/weight_features_D.pkl")
 ```
 
 ### Description
@@ -453,7 +450,7 @@ Stores the selected feature configuration required by the deployed weight predic
 
 Contains supporting utilities developed throughout the project.
 
-These scripts assist with visualization, validation, debugging, hardware testing, and experimental analysis.
+These scripts assist with visualisation, validation, debugging, hardware testing, and experimental analysis.
 
 Examples include:
 
@@ -468,7 +465,7 @@ Examples include:
 These utilities were mainly used to:
 
 - Generate thesis figures
-- Visualize regression performance
+- Visualise regression performance
 - Inspect captured datasets
 - Verify camera measurements
 - Test Intel RealSense D435 functionality
