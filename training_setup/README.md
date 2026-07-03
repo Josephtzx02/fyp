@@ -87,15 +87,32 @@ Before training, ensure that:
 * polygon annotations have been converted into YOLOv8-OBB labels
 * the dataset directory matches the paths defined inside `data.yaml`
 
+* The dataset directory should follow the standard Ultralytics structure:
+
+```text
+book_obb_dataset/
+├── images/
+│   ├── train/
+│   ├── valid/
+│   └── test/
+└── labels/
+    ├── train/
+    ├── valid/
+    └── test/
+```
+
+* Place the exported images into the corresponding `images/` folders. The matching YOLOv8-OBB label files will be generated in the corresponding `labels/` folders by `convert_json_to_labels.py`.
+
 The preprocessing pipeline used in this project consists of:
 
-1. Roboflow annotation
+1. Roboflow polygon annotation
 2. Polygon simplification using the Ramer-Douglas-Peucker (RDP) algorithm
 3. Convex Hull generation
 4. Minimum-area oriented bounding box fitting
-5. Conversion to YOLOv8-OBB label format
+5. (Optional) Manual verification of the generated OBB annotations in Roboflow
+6. Conversion of the verified COCO annotations into YOLOv8-OBB label files
 
-Please refer to the **datafilter/** folder for the preprocessing scripts.
+Please refer to the `datafilter/` folder for the preprocessing scripts and detailed workflow.
 
 ---
 
@@ -132,7 +149,7 @@ runs/
 
 ---
 
-# Resume Training (Optional)
+# Resume Interrupted Training (Optional)
 
 If training is interrupted, it can be resumed from the latest checkpoint.
 
@@ -147,7 +164,7 @@ yolo train resume model=runs/obb/train/weights/last.pt
 Run inference on the testing dataset.
 
 ```bash
-yolo task=obb mode=predict model=runs/obb/train/weights/best.pt source=book_obb_dataset_v1/images/test imgsz=640 conf=0.75
+yolo task=obb mode=predict model=runs/obb/train/weights/best.pt source=book_obb_dataset/images/test imgsz=640 conf=0.75
 ```
 
 ### Parameters
