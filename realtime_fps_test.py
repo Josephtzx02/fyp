@@ -6,7 +6,7 @@ import pyrealsense2 as rs
 from ultralytics import YOLO
 from collections import defaultdict
 
-model = YOLO("runs/obb/train3/weights/best.pt")
+model = YOLO("best.pt")
 
 pipeline = rs.pipeline()
 config = rs.config()
