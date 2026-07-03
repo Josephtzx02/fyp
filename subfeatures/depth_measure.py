@@ -1,24 +1,16 @@
-# depth_measure.py
-
 import numpy as np
 import pyrealsense2 as rs
 
-# ===============================
 # CONFIG
-# ===============================
 FIXED_Z_MM = 400.0
 DEPTH_SCALE = 0.001  # meters → mm
 MIN_VALID_PIXELS = 30
 PATCH_RADIUS = 4
 STRIP_HALF_WIDTH = 3
 
-
-# ===============================
 # HELPERS
-# ===============================
 def clamp(v, lo, hi):
     return max(lo, min(hi, v))
-
 
 def median_depth_mm(depth_frame, cx, cy):
     if depth_frame is None:
@@ -39,7 +31,6 @@ def median_depth_mm(depth_frame, cx, cy):
         return None
 
     return float(np.median(depths))
-
 
 def strip_depth_mm(depth_frame, p1, p2):
     if depth_frame is None:
@@ -69,7 +60,6 @@ def strip_depth_mm(depth_frame, p1, p2):
 
     return float(np.median(depths))
 
-
 def deproject(px, z_mm, intrinsics):
     pt = rs.rs2_deproject_pixel_to_point(
         intrinsics,
@@ -78,10 +68,7 @@ def deproject(px, z_mm, intrinsics):
     )
     return np.array(pt) * 1000.0
 
-
-# ===============================
-# MAIN API (SAFE)
-# ===============================
+# MAIN API
 def measure_obb(box_pts, depth_frame, intrinsics, use_depth):
     """
     Returns:
