@@ -51,18 +51,17 @@ Real-Time Deployment
 
 ```
 .
-├── pkl_files_generated/
-├── others_nonused_codes/
+├── training_setup/
 ├── data_capture/
-├── subfeatures/
 ├── datafilter/
+├── pkl_files_generated/
+├── subfeatures/
+├── others_nonused_codes/
 │
+├── obb_clickable_demo.py
 ├── train_model_width_weight.py
 ├── realtime_fps_test.py
-├── obb_clickable_demo.py
 ├── weight_dataset.csv
-├── data.yaml
-├── yolov8n-obb.pt
 ├── best.pt
 └── README.md
 ```
@@ -70,32 +69,6 @@ Real-Time Deployment
 ---
 
 # Main Files
-
-## train_model_width_weight.py
-
-This script trains the machine learning regression models used for estimating the hidden physical properties of books.
-
-It trains:
-
-* Book width prediction model
-* Book weight prediction model
-
-After training, four serialized `.pkl` files are automatically generated and stored inside the **pkl_files_generated** folder.
-
----
-
-## realtime_fps_test.py
-
-Utility script used to benchmark the inference speed of the trained YOLOv8n-OBB detector.
-
-Purpose:
-
-* Load `best.pt`
-* Run real-time detection using Intel RealSense D435
-* Measure inference FPS
-* Evaluate deployment performance
-
----
 
 ## obb_clickable_demo.py
 
@@ -132,6 +105,32 @@ to perform complete inference.
 
 ---
 
+## train_model_width_weight.py
+
+This script trains the machine learning regression models used for estimating the hidden physical properties of books.
+
+It trains:
+
+* Book width prediction model
+* Book weight prediction model
+
+After training, four serialised `.pkl` files are automatically generated and stored inside the **pkl_files_generated** folder.
+
+---
+
+## realtime_fps_test.py
+
+Utility script used to benchmark the inference speed of the trained YOLOv8n-OBB detector.
+
+Purpose:
+
+* Load `best.pt`
+* Run real-time detection using Intel RealSense D435
+* Measure inference FPS
+* Evaluate deployment performance
+
+---
+
 ## weight_dataset.csv
 
 Contains the complete regression dataset consisting of **205 books**.
@@ -146,6 +145,22 @@ Each record includes ground-truth measurements such as:
 along with engineered features used for machine learning model training.
 
 ---
+
+## best.pt
+
+Final trained YOLOv8n-OBB model obtained after training.
+
+The usual path looks like this: runs/obb/train3/weights/best.pt
+
+This repository uses the checkpoint with the best validation performance (Epoch 111) for deployment.
+
+---
+
+# Folder Description
+
+---
+
+# 1. training_setup/
 
 ## data.yaml
 
@@ -167,20 +182,6 @@ Used during YOLOv8-OBB training.
 Official pretrained YOLOv8 Nano Oriented Bounding Box model provided by Ultralytics.
 
 Used as the initial pretrained backbone before custom training.
-
----
-
-## best.pt
-
-Final trained YOLOv8n-OBB model obtained after training.
-
-The usual path looks like this: runs/obb/train3/weights/best.pt
-
-This repository uses the checkpoint with the best validation performance (Epoch 111) for deployment.
-
----
-
-# Folder Description
 
 ---
 
