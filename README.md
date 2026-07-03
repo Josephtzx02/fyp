@@ -174,6 +174,8 @@ Used as the initial pretrained backbone before custom training.
 
 Final trained YOLOv8n-OBB model obtained after training.
 
+The usual path looks like this: runs/obb/train3/weights/best.pt
+
 This repository uses the checkpoint with the best validation performance (Epoch 111) for deployment.
 
 ---
