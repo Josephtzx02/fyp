@@ -9,7 +9,7 @@ import pyrealsense2 as rs
 import threading
 
 # CONFIG
-MODEL_PATH = "best.pt"
+MODEL_PATH = "runs/obb/train3/weights/best.pt"
 USE_REALSENSE = True
 SOURCE = 2 # "book_obb_dataset_v3/images/train/20260117_162733_287050_jpg.rf.cc44722e0d74f044ec88e97d87b29588.jpg"
 START_CONF = 0.8
@@ -211,7 +211,6 @@ while True:
         "height_px": PENDING_DET["height_px"],
         "thickness_mm_est": PENDING_DET["thickness_mm"],
         "height_mm_est": PENDING_DET["height_mm"],
-        "mode": PENDING_DET["mode_used"],
         "angle": angle_deg
         }
         df = pd.DataFrame([row])
