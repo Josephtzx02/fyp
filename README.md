@@ -331,7 +331,7 @@ Examples include:
 
 This strategy helps produce a more balanced regression dataset.
 
-## weight_dataset.csv
+## width_weight_dataset.csv
 
 Contains the complete regression dataset consisting of **205 books**.
 
