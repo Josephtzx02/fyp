@@ -68,8 +68,6 @@ If false → stop, driver problem.
 
 ---
 
----
-
 # Step 3 — Install Required Libraries
 
 Install all required Python packages.
