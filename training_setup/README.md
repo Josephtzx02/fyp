@@ -53,6 +53,21 @@ Install the CUDA-enabled version of PyTorch.
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
+Then verify your GPU.
+
+```bash
+python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))"
+```
+
+You MUST see:
+
+True
+Your GPU name
+
+If false → stop, driver problem.
+
+---
+
 ---
 
 # Step 3 — Install Required Libraries
