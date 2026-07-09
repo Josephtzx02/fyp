@@ -1,4 +1,9 @@
 # 3D Scene Analysis and Robotic Vision for Intelligent Book Retrieval Systems
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![YOLOv8-OBB](https://img.shields.io/badge/YOLOv8-OBB-orange)
+![Intel RealSense](https://img.shields.io/badge/Intel-RealSense-0071C5)
+![Machine Learning](https://img.shields.io/badge/Regression-Scikit--Learn-yellow)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 > Final Year Project (FYP)
 > Bachelor of Manufacturing Engineering with Management (Hons.)
