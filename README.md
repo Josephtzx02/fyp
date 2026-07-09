@@ -1,4 +1,4 @@
-# 3D Scene Analysis and Robotic Vision for Intelligent Book Retrieval Systems
+# 📘 3D Scene Analysis and Robotic Vision for Intelligent Book Retrieval Systems
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![YOLOv8-OBB](https://img.shields.io/badge/YOLOv8-OBB-orange)
 ![Intel RealSense](https://img.shields.io/badge/Intel-RealSense-0071C5)
