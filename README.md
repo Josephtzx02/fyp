@@ -2,7 +2,8 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![YOLOv8-OBB](https://img.shields.io/badge/YOLOv8-OBB-orange)
 ![Intel RealSense](https://img.shields.io/badge/Intel-RealSense-0071C5)
-![Machine Learning](https://img.shields.io/badge/Regression-Scikit--Learn-yellow)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-red)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Regression-yellow)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 > Final Year Project (FYP)
