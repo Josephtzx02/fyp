@@ -47,6 +47,18 @@ Real-Time Deployment
 
 ---
 
+## Project Continuation
+
+This repository contains the perception pipeline developed during **Phase 1** of the project.
+
+The robotic manipulation and Open3D simulation developed during the second phase are available in a separate repository:
+
+➡️ **FYP Phase 2 – Intelligent Book Retrieval Robot Simulator**
+
+This second repository extends the perception outputs generated in this project into a complete robotic grasp planning and retrieval simulation.
+
+---
+
 # Repository Structure
 
 ```
