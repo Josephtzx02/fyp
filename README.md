@@ -7,7 +7,9 @@
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 > Final Year Project (FYP)
+> 
 > Bachelor of Manufacturing Engineering with Management (Hons.)
+> 
 > Universiti Sains Malaysia (USM)
 
 ## Overview
