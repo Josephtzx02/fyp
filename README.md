@@ -12,6 +12,8 @@
 > 
 > Universiti Sains Malaysia (USM)
 
+---
+
 ## Overview
 
 This repository contains the complete source code developed for my Final Year Project titled:
